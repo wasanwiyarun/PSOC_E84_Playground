@@ -60,3 +60,16 @@ serial text.
 LED_0 blinks every 500 ms by default; send `on`, `off`, `status`, or `help`
 through the serial console to control it. See the example's README for build,
 programming, and command details.
+
+## Example roadmap
+
+| Chapter | Status | Purpose |
+| --- | --- | --- |
+| `001_Hello_World` | verified | Basic build, flash, and serial output |
+| `002_LED_Blink_Serial_Control` | verified | Console-controlled LED thread |
+| `003_I2C_Sensor_Self_Test` | verified | Checks SHT40, BMI270, and DPS368 availability |
+| `004_Environment_Monitor` | verified | Reads temperature, humidity, and pressure |
+| `005_IMU_Motion_Monitor` | blocked | BMI270 initialization works but produces zero-valued motion data |
+
+See [the peripheral roadmap](docs/PERIPHERAL_ROADMAP.md) for test evidence,
+known limits, and the next chapters.
