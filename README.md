@@ -53,3 +53,10 @@ tools/flash_and_monitor_pse84_ai.sh \
 The shared tool accepts `--port`, `--baud`, and `--timeout` overrides. It
 does not contain an individual example's build configuration or expected
 serial text.
+
+## LED blink with serial control
+
+`002_LED_Blink_Serial_Control` runs independent LED and serial-input threads.
+LED_0 blinks every 500 ms by default; send `on`, `off`, `status`, or `help`
+through the serial console to control it. See the example's README for build,
+programming, and command details.
