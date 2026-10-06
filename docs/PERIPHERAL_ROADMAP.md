@@ -15,7 +15,7 @@ write timestamped serial logs that are intentionally ignored by Git.
 | 007 | BMM350 magnetometer | Blocked | Zephyr contains a BMM350 driver, but this board DTS has no enabled I3C controller, pinctrl, or BMM350 device node. |
 | 008 | BGT60TR13C radar | Blocked | No matching BGT60TR13C driver exists in this Zephyr tree and the board has no radar SPI device node. |
 | 009 | PDM microphone | Blocked | An Infineon DMIC driver exists, but all E84 PDM controller channels and board microphone pin configuration are disabled. |
-| 010 | Wi-Fi | Deferred | The CYW55513 SDIO hardware is declared; joining an access point needs approved network credentials. |
+| 010 | CYW55513 Wi-Fi SSID scan | Verified | Board scan completed and printed nearby SSIDs, RSSI, and channel without connecting. |
 
 ## BMI270 follow-up
 
@@ -44,5 +44,6 @@ claim to use them.
   E84 board leaves `dmic0` and every channel disabled. A board overlay needs
   the actual microphone pins, clock, channel choice, and DMA/audio format.
 - **Wi-Fi:** The E84 M55 DTS declares the CYW55513 SDIO and control GPIOs.
-  A connection test is intentionally deferred until an approved SSID and
-  credential are supplied; the project should not embed or guess them.
+  Chapter 010 verifies credential-free scanning. Connecting to an access point
+  remains deferred until an approved SSID and credential are supplied; the
+  project will not embed or guess them.
