@@ -74,7 +74,7 @@ programming, and command details.
 | `002_LED_Blink_Serial_Control` | verified | Console-controlled LED thread |
 | `003_I2C_Sensor_Self_Test` | verified | Checks SHT40, BMI270, and DPS368 availability |
 | `004_Environment_Monitor` | verified | Reads temperature, humidity, and pressure |
-| `005_IMU_Motion_Monitor` | blocked | BMI270 initialization works but produces zero-valued motion data |
+| `005_BMI270_Raw_Register_Diagnostic` | verified | BMI270 chip ID and non-zero raw motion registers verified directly over I2C |
 | `006_Button_LED_Event` | protocol verified | Console and LED GPIO verified; SW1 press remains a manual acceptance check |
 | `010_WiFi_SSID_Scan` | verified | CYW55513 scan prints nearby SSIDs without connecting |
 
