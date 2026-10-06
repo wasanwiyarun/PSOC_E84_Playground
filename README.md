@@ -70,6 +70,7 @@ programming, and command details.
 | `003_I2C_Sensor_Self_Test` | verified | Checks SHT40, BMI270, and DPS368 availability |
 | `004_Environment_Monitor` | verified | Reads temperature, humidity, and pressure |
 | `005_IMU_Motion_Monitor` | blocked | BMI270 initialization works but produces zero-valued motion data |
+| `006_Button_LED_Event` | protocol verified | Console and LED GPIO verified; SW1 press remains a manual acceptance check |
 
 See [the peripheral roadmap](docs/PERIPHERAL_ROADMAP.md) for test evidence,
 known limits, and the next chapters.

@@ -11,7 +11,7 @@ write timestamped serial logs that are intentionally ignored by Git.
 | 003 | I²C SHT40, BMI270, DPS368 | Verified | All expected devices responded at `0x44`, `0x68`, and `0x77`. |
 | 004 | SHT40 + DPS368 | Verified | Live temperature, humidity, and pressure measurements received. |
 | 005 | BMI270 accelerometer + gyroscope | Blocked | Device initializes and fetch calls succeed, but all six axes remain zero even after explicitly enabling both 100 Hz data paths. |
-| 006 | Button + LED event | Planned | Exercise the board `sw0` and `led0` aliases. |
+| 006 | Button + LED event | Protocol verified | Firmware booted with GPIO setup; serial LED commands passed. A physical SW1 press is still required to verify the interrupt event end-to-end. |
 | 007 | BMM350 magnetometer | Planned | Requires an I3C device-tree/driver integration review. |
 | 008 | BGT60TR13C radar | Planned | Requires SPI device-tree/driver integration. |
 | 009 | PDM microphone | Planned | Requires audio clock and PDM configuration validation. |
