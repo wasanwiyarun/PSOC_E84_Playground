@@ -1,3 +1,4 @@
 # Python bytecode generated when running shared utilities.
 tools/__pycache__/
+tools/python/**/__pycache__/
 /test-results/
