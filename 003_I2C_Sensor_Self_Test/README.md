@@ -12,4 +12,5 @@ source /home/wasanw/zephyrproject/.venv/bin/activate
 python test_firmware.py --port /dev/ttyACM0
 ```
 
-Commands: `info`, `sensor scan`, `sensor status`, and `help`.
+Commands: `info`, `sensor scan`, `sensor status`, and `help`. The test saves a
+timestamped serial log in `test-results/` by default.

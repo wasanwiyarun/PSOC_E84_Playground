@@ -30,6 +30,11 @@ python tools/serial_expect.py \
 
 Exit codes: `0` matched, `1` timed out, `2` serial-port error.
 
+Example-specific firmware tests keep their commands and expected responses next
+to each firmware project.  Their common serial waiting and log tee support is
+kept in `tools/python/psoc_e84_tools/`, so new tests do not duplicate the
+transport behavior.
+
 ## Build, flash, and verify the PSOC Edge84 AI Kit
 
 Each example owns its build script because its board, build directory, and

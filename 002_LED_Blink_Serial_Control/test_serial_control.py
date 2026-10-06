@@ -6,25 +6,11 @@ import contextlib
 from datetime import datetime
 from pathlib import Path
 import sys
-import time
 
 import serial
 
-
-class Tee:
-    """Write console output to both the terminal and the test log."""
-
-    def __init__(self, *streams: object) -> None:
-        self.streams = streams
-
-    def write(self, data: str) -> int:
-        for stream in self.streams:
-            stream.write(data)
-        return len(data)
-
-    def flush(self) -> None:
-        for stream in self.streams:
-            stream.flush()
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools" / "python"))
+from psoc_e84_tools.serial_console import Tee, wait_for
 
 
 def parse_args() -> argparse.Namespace:
@@ -64,28 +50,6 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     return parser.parse_args()
-
-
-def wait_for(device: serial.Serial, expected: str, timeout: float) -> bool:
-    """Print incoming data until *expected* is seen or the deadline expires."""
-    expected_bytes = expected.encode()
-    received = b""
-    deadline = time.monotonic() + timeout
-
-    while time.monotonic() < deadline:
-        data = device.read(device.in_waiting or 1)
-        if not data:
-            continue
-
-        sys.stdout.write(data.decode(errors="replace"))
-        sys.stdout.flush()
-        received += data
-        if expected_bytes in received:
-            return True
-
-        received = received[-max(len(expected_bytes), 256) :]
-
-    return False
 
 
 def send_and_expect(

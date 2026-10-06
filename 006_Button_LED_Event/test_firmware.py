@@ -4,37 +4,11 @@ import argparse
 from datetime import datetime
 from pathlib import Path
 import sys
-import time
 
 import serial
 
-
-class Tee:
-    def __init__(self, log_file):
-        self.log_file = log_file
-
-    def write(self, text):
-        sys.__stdout__.write(text)
-        self.log_file.write(text)
-        self.log_file.flush()
-
-    def flush(self):
-        sys.__stdout__.flush()
-        self.log_file.flush()
-
-
-def wait_for(port, expected, timeout):
-    deadline = time.monotonic() + timeout
-    received = b""
-    while time.monotonic() < deadline:
-        data = port.read(port.in_waiting or 1)
-        if data:
-            print(data.decode(errors="replace"), end="", flush=True)
-            received += data
-            if expected.encode() in received:
-                return True
-            received = received[-2048:]
-    return False
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools" / "python"))
+from psoc_e84_tools.serial_console import Tee, wait_for
 
 
 def main():
@@ -43,7 +17,7 @@ def main():
     parser.add_argument("--timeout", type=float, default=3.0)
     parser.add_argument("--log", type=Path)
     args = parser.parse_args()
-    log_path = args.log or Path("test-results") / (
+    log_path = args.log or Path(__file__).parent / "test-results" / (
         f"button-led-event-{datetime.now():%Y%m%d-%H%M%S}.log"
     )
     log_path.parent.mkdir(parents=True, exist_ok=True)
@@ -57,7 +31,7 @@ def main():
     ]
     original_stdout = sys.stdout
     with log_path.open("w", encoding="utf-8") as log_file:
-        sys.stdout = Tee(log_file)
+        sys.stdout = Tee(original_stdout, log_file)
         try:
             print(f"LOG: {log_path}")
             try:
