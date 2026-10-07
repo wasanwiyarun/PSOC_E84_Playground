@@ -16,6 +16,7 @@ write timestamped serial logs that are intentionally ignored by Git.
 | 008 | BGT60TR13C radar | Blocked | No matching BGT60TR13C driver exists in this Zephyr tree and the board has no radar SPI device node. |
 | 009 | PDM microphone | Blocked | An Infineon DMIC driver exists, but all E84 PDM controller channels and board microphone pin configuration are disabled. |
 | 010 | CYW55513 Wi-Fi SSID scan | Verified | Board scan completed and printed nearby SSIDs, RSSI, and channel without connecting. |
+| 011 | CYW55513 Bluetooth LE | Verified | Controller firmware loaded over H:4 UART; serial test verified connectable advertising control. A phone scanner remains the optional RF acceptance check. |
 
 ## BMI270 follow-up
 
@@ -44,3 +45,6 @@ claim to use them.
   Chapter 010 verifies credential-free scanning. Connecting to an access point
   remains deferred until an approved SSID and credential are supplied; the
   project will not embed or guess them.
+- **Bluetooth LE:** Chapter 011 verifies controller startup and advertising.
+  Future work can add a custom GATT service, pairing, or a phone-based
+  end-to-end acceptance test.
