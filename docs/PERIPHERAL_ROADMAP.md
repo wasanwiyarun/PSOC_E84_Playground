@@ -17,6 +17,64 @@ write timestamped serial logs that are intentionally ignored by Git.
 | 009 | PDM microphone | Blocked | An Infineon DMIC driver exists, but all E84 PDM controller channels and board microphone pin configuration are disabled. |
 | 010 | CYW55513 Wi-Fi SSID scan | Verified | Board scan completed and printed nearby SSIDs, RSSI, and channel without connecting. |
 | 011 | CYW55513 Bluetooth LE | Verified | Controller firmware loaded over H:4 UART; serial test verifies connectable advertising control and the standard Nordic UART Service UUID. nRF Connect remains the over-the-air NUS acceptance check. |
+| 012 | CM55→CM33-NS PSA mailbox relay | Verified | CM33-NS and CM55 paired standalone images completed 100 ordered PSA requests through the supported relay on the board; PSA version was stable at `0x00000101`. |
+| 013 | External QSPI flash, raw API | Planned | Exercise only a newly reserved storage partition: identify, erase, write a patterned block, read it back, and verify integrity. |
+| 014 | LittleFS on external QSPI flash | Planned | Mount a dedicated storage partition, create/read/replace a record, and prove the record persists across a board reset. |
+| 015 | Secure Enclave service | Planned | Build a secure/non-secure demonstration in which non-secure code calls one restricted secure operation and validates its result without printing or exporting secret material. |
+
+## Planned platform chapters
+
+### 012: CM55→CM33-NS PSA mailbox relay
+
+This is a multicore firmware chapter, but the installed PSoC E84 support is
+not a general-purpose application mailbox. CM33-NS owns CM55 boot and the
+TF-M relay; CM55 is the supported client of that relay. The chapter therefore
+builds the two standalone images in order, then has CM55 issue 100 ordered
+`psa_framework_version()` requests through the mailbox/SRF relay.
+
+Acceptance requires both images to build, both cores to print their identity,
+and CM55 to emit `PASS RELAY COUNT=100` with one stable nonzero PSA version.
+CM55 must be flashed before CM33-NS, because CM33-NS starts CM55 at reset.
+The relay client in the installed SDK waits indefinitely when CM33-NS is
+absent, so a missing-core timeout test is explicitly outside this chapter.
+The chapter does not expose raw shared-memory pointers or an arbitrary
+CM33-to-CM55 message channel.
+
+### 013: external-QSPI flash raw access
+
+The board memory map describes a 64 MB external QSPI flash and an existing
+`storage_partition`. Before writing anything, the chapter must inspect the
+actual partition map and reserve a region that cannot overlap a boot image,
+application image, or future secure asset. The test then uses Zephyr's flash
+API to erase one sector, write a known pattern plus CRC, read it back, and
+verify it. It restores the erased state at the end of the test.
+
+Acceptance is limited to the reserved storage partition. A successful build or
+flash-driver probe alone does not authorize writes to application partitions.
+
+### 014: LittleFS storage
+
+This follows raw-flash verification. The example will mount LittleFS over the
+reserved storage partition, write a versioned settings record and a short log,
+unmount/remount it, reset the board, then verify both records and checksums.
+It will also report free-space and mount errors over the serial console.
+
+The filesystem owner is a single core in the first version. CM55↔CM33 shared
+filesystem access is explicitly out of scope; Chapter 012 validates only the
+supported PSA relay and does not provide a general filesystem request path.
+
+### 015: Secure Enclave service
+
+The board support already provides secure and non-secure CM33 build paths;
+this chapter first documents which PSE84 secure-enclave/secure-request API is
+available in the installed SDK and selects one safe operation. The candidate
+demonstration is a secure-generated challenge response or secure monotonic
+counter read, rather than embedding a private key in application source.
+
+Acceptance requires a non-secure caller to receive a valid result, an invalid
+request to be rejected, and a build/flash procedure that preserves the secure
+and non-secure image chain. No secret bytes, keys, or credentials will be
+printed in serial logs or committed to the repository.
 
 ## BMI270 follow-up
 
@@ -48,3 +106,12 @@ claim to use them.
 - **Bluetooth LE:** Chapter 011 verifies controller startup, advertising, and the standard Nordic UART Service.
   Future work can add a custom GATT service, pairing, or a phone-based
   end-to-end acceptance test.
+- **CM55→CM33-NS relay:** Chapter 012 builds a supported PSA mailbox relay
+  test before any feature needs one core to request a service owned by another.
+- **External flash and LittleFS:** Chapters 013 and 014 use only a deliberately
+  reserved storage partition. Raw-flash verification comes before filesystem
+  formatting and persistence tests.
+- **Secure Enclave:** Chapter 015 is planned as a constrained secure-service
+  demonstration using the board's secure/non-secure CM33 support. The exact
+  service API will be selected only after validating the installed SDK's
+  secure-enclave interface.

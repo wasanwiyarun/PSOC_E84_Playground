@@ -66,7 +66,7 @@ LED_0 blinks every 500 ms by default; send `on`, `off`, `status`, or `help`
 through the serial console to control it. See the example's README for build,
 programming, and command details.
 
-## Example roadmap
+## Examples and roadmap
 
 | Chapter | Status | Purpose |
 | --- | --- | --- |
@@ -78,6 +78,31 @@ programming, and command details.
 | `006_Button_LED_Event` | protocol verified | Console and LED GPIO verified; SW1 press remains a manual acceptance check |
 | `010_WiFi_SSID_Scan` | verified | CYW55513 scan prints nearby SSIDs without connecting |
 | `011_Bluetooth_LE_Advertiser` | verified | CYW55513 advertises `PSE84-Playground` and the standard Nordic UART Service over BLE |
+| `012_CM55_CM33_IPC_Mailbox` | verified | CM55 made 100 ordered PSA requests through the supported mailbox relay to CM33-NS/TF-M |
+| `013_External_Flash_Raw_Access` | planned | Safely identify, erase, write, read back, and verify an explicitly reserved external-QSPI flash region |
+| `014_LittleFS_Storage` | planned | Mount LittleFS on the dedicated storage partition and persist a small settings/log record across reset |
+| `015_Secure_Enclave_Service` | planned | Call a narrowly scoped secure service from non-secure firmware without exposing secret material |
+
+The next work is deliberately ordered: validate the supported CM55→CM33-NS
+mailbox relay first, then prove safe raw flash access before placing a
+filesystem on it, then add LittleFS.
+The secure-enclave chapter follows a separate secure/non-secure CM33 build
+path and must not be combined with the storage or IPC examples until its trust
+boundaries are verified.
+
+## Remaining onboard peripherals
+
+| Peripheral | Current position | Next prerequisite |
+| --- | --- | --- |
+| BMM350 magnetometer | blocked | Enable and pinmux I3C, add the verified board sensor node, then run an ID/read test |
+| BGT60TR13C radar | blocked | Add the board SPI/reset/interrupt integration and a compatible Zephyr driver |
+| PDM microphone | blocked | Provide microphone pin, clock, DMA, and audio-format board configuration |
+| Wi-Fi | scan verified | Obtain an approved SSID and credentials before adding an association example |
+| Bluetooth LE | NUS loopback verified | Future scope: pairing, custom GATT, and repeatable phone acceptance automation |
+| CM55→CM33-NS relay | verified | CM55 completed 100 ordered PSA relay requests to CM33-NS on the board |
+| External QSPI flash | planned | Reserve a non-image partition before any destructive read/write test |
+| LittleFS | planned | Complete raw-flash verification and confirm partition ownership |
+| Secure Enclave | planned | Define one public secure operation and validate the secure/non-secure image chain |
 
 See [the peripheral roadmap](docs/PERIPHERAL_ROADMAP.md) for test evidence,
-known limits, and the next chapters.
+known limits, chapter-level acceptance criteria, and the next chapters.
