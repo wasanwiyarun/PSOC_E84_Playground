@@ -10,23 +10,21 @@ write timestamped serial logs that are intentionally ignored by Git.
 | 002 | LED0 + console | Verified | Blink control, period changes, and repeated serial commands tested. |
 | 003 | I²C SHT40, BMI270, DPS368 | Verified | All expected devices responded at `0x44`, `0x68`, and `0x77`. |
 | 004 | SHT40 + DPS368 | Verified | Live temperature, humidity, and pressure measurements received. |
-| 005 | BMI270 accelerometer + gyroscope | Blocked | Device initializes and fetch calls succeed, but all six axes remain zero even after explicitly enabling both 100 Hz data paths. |
+| 005 | BMI270 accelerometer + gyroscope | Verified | Zephyr driver returns live converted motion data; test also verifies non-zero raw data at `0x68`. |
 | 006 | Button + LED event | Protocol verified | Firmware booted with GPIO setup; serial LED commands passed. A physical SW1 press is still required to verify the interrupt event end-to-end. |
 | 007 | BMM350 magnetometer | Blocked | Zephyr contains a BMM350 driver, but this board DTS has no enabled I3C controller, pinctrl, or BMM350 device node. |
 | 008 | BGT60TR13C radar | Blocked | No matching BGT60TR13C driver exists in this Zephyr tree and the board has no radar SPI device node. |
 | 009 | PDM microphone | Blocked | An Infineon DMIC driver exists, but all E84 PDM controller channels and board microphone pin configuration are disabled. |
 | 010 | CYW55513 Wi-Fi SSID scan | Verified | Board scan completed and printed nearby SSIDs, RSSI, and channel without connecting. |
+| 011 | CYW55513 Bluetooth LE | Verified | Controller firmware loaded over H:4 UART; serial test verifies connectable advertising control and the standard Nordic UART Service UUID. nRF Connect remains the over-the-air NUS acceptance check. |
 
 ## BMI270 follow-up
 
-This is deliberately not merged as a working application.  The local Zephyr
-BMI270 driver recognizes the board device at I²C address `0x68` and its fetch
-operation succeeds, but returned acceleration and gyroscope registers are all
-zero.  The test also attempted `SENSOR_ATTR_SAMPLING_FREQUENCY` at 100 Hz for
-both `SENSOR_CHAN_ACCEL_XYZ` and `SENSOR_CHAN_GYRO_XYZ`, followed by a sample
-delay; readings stayed zero.  Investigate the E84 board's sensor power/reset
-wiring or a Zephyr BMI270 board configuration update before promoting that
-chapter.
+The board schematic routes the BMI270 through I2C0 at `0x68`. The rebuilt
+motion monitor uses the normal Zephyr driver, checks its configuration return
+codes, and validates both realistic converted gravity and non-zero raw data.
+The earlier all-zero result was an obsolete application/test issue, not a
+hardware or current-driver blocker.
 
 ## Capability review: remaining peripherals
 
@@ -47,3 +45,6 @@ claim to use them.
   Chapter 010 verifies credential-free scanning. Connecting to an access point
   remains deferred until an approved SSID and credential are supplied; the
   project will not embed or guess them.
+- **Bluetooth LE:** Chapter 011 verifies controller startup, advertising, and the standard Nordic UART Service.
+  Future work can add a custom GATT service, pairing, or a phone-based
+  end-to-end acceptance test.

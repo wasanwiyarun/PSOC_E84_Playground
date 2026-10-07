@@ -74,9 +74,10 @@ programming, and command details.
 | `002_LED_Blink_Serial_Control` | verified | Console-controlled LED thread |
 | `003_I2C_Sensor_Self_Test` | verified | Checks SHT40, BMI270, and DPS368 availability |
 | `004_Environment_Monitor` | verified | Reads temperature, humidity, and pressure |
-| `005_IMU_Motion_Monitor` | blocked | BMI270 initialization works but produces zero-valued motion data |
+| `005_IMU_Motion_Monitor` | verified | Zephyr BMI270 driver reports converted live motion data, with raw-register cross-check |
 | `006_Button_LED_Event` | protocol verified | Console and LED GPIO verified; SW1 press remains a manual acceptance check |
 | `010_WiFi_SSID_Scan` | verified | CYW55513 scan prints nearby SSIDs without connecting |
+| `011_Bluetooth_LE_Advertiser` | verified | CYW55513 advertises `PSE84-Playground` and the standard Nordic UART Service over BLE |
 
 See [the peripheral roadmap](docs/PERIPHERAL_ROADMAP.md) for test evidence,
 known limits, and the next chapters.
