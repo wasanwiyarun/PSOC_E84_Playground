@@ -1,4 +1,0 @@
-/* Use raw I2C transactions; do not initialize the normal BMI270 sensor driver. */
-&bosch_bmi270 {
-	status = "disabled";
-};
