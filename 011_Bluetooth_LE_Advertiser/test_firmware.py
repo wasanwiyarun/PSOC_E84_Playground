@@ -40,10 +40,12 @@ def run_checks(port_name, timeout):
             time.sleep(0.2)
             port.reset_input_buffer()
             checks = [
-                ("info", "APP=bluetooth_le_advertiser VERSION=0.1.0"),
-                ("bt status", "OK BT ADVERTISING=ON NAME=PSE84-Playground"),
-                ("bt advertise stop", "OK BT ADVERTISING=OFF NAME=PSE84-Playground"),
-                ("bt advertise start", "OK BT ADVERTISING=ON NAME=PSE84-Playground"),
+                ("info", "OK NUS SERVICE_UUID=6e400001-b5a3-f393-e0a9-e50e24dcca9e"),
+                ("info", "OK NUS LOOPBACK=ON"),
+                ("bt status", "OK BT ADVERTISING=ON NAME=PSE84-Playground SERVICE=NUS"),
+                ("bt advertise stop", "OK BT ADVERTISING=OFF NAME=PSE84-Playground SERVICE=NUS"),
+                ("bt advertise start", "OK BT ADVERTISING=ON NAME=PSE84-Playground SERVICE=NUS"),
+                ("help", "ble send <text>"),
                 ("invalid", "ERR UNSUPPORTED invalid"),
             ]
             for command, expected in checks:
@@ -52,7 +54,7 @@ def run_checks(port_name, timeout):
     except serial.SerialException as error:
         print(f"Serial error: {error}", file=sys.stderr)
         return 2
-    print("PASS: Bluetooth controller initialized and LE advertising control verified.")
+    print("PASS: Bluetooth controller, NUS UUID advertising, and LE advertising control verified.")
     return 0
 
 

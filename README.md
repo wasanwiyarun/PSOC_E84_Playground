@@ -77,7 +77,7 @@ programming, and command details.
 | `005_IMU_Motion_Monitor` | verified | Zephyr BMI270 driver reports converted live motion data, with raw-register cross-check |
 | `006_Button_LED_Event` | protocol verified | Console and LED GPIO verified; SW1 press remains a manual acceptance check |
 | `010_WiFi_SSID_Scan` | verified | CYW55513 scan prints nearby SSIDs without connecting |
-| `011_Bluetooth_LE_Advertiser` | verified | CYW55513 controller starts and advertises `PSE84-Playground` over BLE |
+| `011_Bluetooth_LE_Advertiser` | verified | CYW55513 advertises `PSE84-Playground` and the standard Nordic UART Service over BLE |
 
 See [the peripheral roadmap](docs/PERIPHERAL_ROADMAP.md) for test evidence,
 known limits, and the next chapters.
