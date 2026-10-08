@@ -79,9 +79,11 @@ programming, and command details.
 | `010_WiFi_SSID_Scan` | verified | CYW55513 scan prints nearby SSIDs without connecting |
 | `011_Bluetooth_LE_Advertiser` | verified | CYW55513 advertises `PSE84-Playground` and the standard Nordic UART Service over BLE |
 | `012_CM55_CM33_IPC_Mailbox` | verified | CM55 made 100 ordered PSA requests through the supported mailbox relay to CM33-NS/TF-M |
-| `013_External_Flash_Raw_Access` | planned | Safely identify, erase, write, read back, and verify an explicitly reserved external-QSPI flash region |
-| `014_LittleFS_Storage` | planned | Mount LittleFS on the dedicated storage partition and persist a small settings/log record across reset |
-| `015_Secure_Enclave_Service` | planned | Call a narrowly scoped secure service from non-secure firmware without exposing secret material |
+| `013_External_Flash_Raw_Access` | verified | Identify, erase, write, read back, and verify the dedicated external-QSPI test region |
+| `014_LittleFS_Storage` | verified | Mount LittleFS on the dedicated storage partition and persist a settings/log record across reset |
+| `015_Device_Settings_CRC` | verified | Store, retrieve, and validate a Zephyr settings record with a CRC integrity check |
+| `016_Secure_Crypto_Services` | verified | Exercise TF-M PSA random, AES, ECC/ECDH, and signature services from non-secure firmware |
+| `017_LVGL_Waveshare_4_3_Display` | hardware verified | Custom CM55 LVGL driver for the Waveshare 4.3-inch RPi DSI display; GFXSS, MIPI-DSI, I2C panel control, and LVGL text frame verified |
 
 The next work is deliberately ordered: validate the supported CM55→CM33-NS
 mailbox relay first, then prove safe raw flash access before placing a

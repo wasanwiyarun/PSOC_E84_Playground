@@ -1,0 +1,5 @@
+description: Waveshare 4.3-inch Raspberry Pi DSI display on PSoC Edge E84 GFXSS
+
+compatible: "waveshare,ws43"
+
+include: [i2c-device.yaml, display-controller.yaml]
