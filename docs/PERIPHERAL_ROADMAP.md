@@ -12,7 +12,7 @@ write timestamped serial logs that are intentionally ignored by Git.
 | 004 | SHT40 + DPS368 | Verified | Live temperature, humidity, and pressure measurements received. |
 | 005 | BMI270 accelerometer + gyroscope | Verified | Zephyr driver returns live converted motion data; test also verifies non-zero raw data at `0x68`. |
 | 006 | Button + LED event | Protocol verified | Firmware booted with GPIO setup; serial LED commands passed. A physical SW1 press is still required to verify the interrupt event end-to-end. |
-| 007 | BMM350 magnetometer | Blocked | Zephyr contains a BMM350 driver, but this board DTS has no enabled I3C controller, pinctrl, or BMM350 device node. |
+| 007 | BMM350 magnetometer | ID/data verified via Chapter 020 | Chapter-local PDL I3C backend reads ID 0x33 and compensated XYZ at 25 Hz. Generic Zephyr controller integration and calibrated heading remain pending. |
 | 008 | BGT60TR13C radar | Blocked | No matching BGT60TR13C driver exists in this Zephyr tree and the board has no radar SPI device node. |
 | 009 | PDM microphone | Blocked | An Infineon DMIC driver exists, but all E84 PDM controller channels and board microphone pin configuration are disabled. |
 | 010 | CYW55513 Wi-Fi SSID scan | Verified | Board scan completed and printed nearby SSIDs, RSSI, and channel without connecting. |
@@ -90,9 +90,12 @@ The remaining onboard peripherals are not skipped because they are
 uninteresting; they need board-support work before an application can safely
 claim to use them.
 
-- **BMM350:** The local tree has I3C BMM350 bindings and a driver. The E84
-  board must first enable and pinmux `i3c0`, add the sensor node with its
-  verified address, and establish any required pull-up/power-control setup.
+- **BMM350:** Chapter 020 now verifies the board-default I3C wiring using a
+  local PDL backend: P3.0/P3.1, internal pull-ups, 100 MHz controller clock,
+  dynamic address 0x09, ID 0x33 and 25 Hz compensated data. This does not add
+  a generic Zephyr I3C controller driver or sensor node. The first physical
+  test reported a strong field (~2280 µT); magnetic environment/calibration
+  and mounting validation are required before adding compass heading.
 - **BGT60TR13C:** There is no BGT60 radar driver or board SPI node in this
   Zephyr revision. A dedicated driver and validated reset/interrupt/SPI device
   tree integration are prerequisites.

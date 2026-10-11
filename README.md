@@ -84,6 +84,8 @@ programming, and command details.
 | `015_Device_Settings_CRC` | verified | Store, retrieve, and validate a Zephyr settings record with a CRC integrity check |
 | `016_Secure_Crypto_Services` | verified | Exercise TF-M PSA random, AES, ECC/ECDH, and signature services from non-secure firmware |
 | `017_LVGL_Waveshare_4_3_Display` | hardware verified | Custom CM55 LVGL driver for the Waveshare 4.3-inch RPi DSI display; GFXSS, MIPI-DSI, I2C panel control, and LVGL text frame verified |
+| `018_LVGL_Waveshare_Touch_Input` | hardware verified | FT5406 touch input and LVGL button interaction |
+| `020_Kalman_Artificial_Horizon` | hardware protocol verified | Upright Kalman flight dashboard, ground zero, relative-heading dial, DPS368 relative altitude/climb, BMM350 high-field warning; calibrated north pending |
 
 The next work is deliberately ordered: validate the supported CM55→CM33-NS
 mailbox relay first, then prove safe raw flash access before placing a
@@ -96,7 +98,7 @@ boundaries are verified.
 
 | Peripheral | Current position | Next prerequisite |
 | --- | --- | --- |
-| BMM350 magnetometer | blocked | Enable and pinmux I3C, add the verified board sensor node, then run an ID/read test |
+| BMM350 magnetometer | I3C ID/data verified in 020 | Chapter-local PDL backend, chip ID 0x33, 25 Hz compensated XYZ; high-field warning, calibrated heading pending |
 | BGT60TR13C radar | blocked | Add the board SPI/reset/interrupt integration and a compatible Zephyr driver |
 | PDM microphone | blocked | Provide microphone pin, clock, DMA, and audio-format board configuration |
 | Wi-Fi | scan verified | Obtain an approved SSID and credentials before adding an association example |
