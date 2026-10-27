@@ -86,6 +86,8 @@ programming, and command details.
 | `017_LVGL_Waveshare_4_3_Display` | hardware verified | Custom CM55 LVGL driver for the Waveshare 4.3-inch RPi DSI display; GFXSS, MIPI-DSI, I2C panel control, and LVGL text frame verified |
 | `018_LVGL_Waveshare_Touch_Input` | hardware verified | FT5406 touch input and LVGL button interaction |
 | `020_Kalman_Artificial_Horizon` | hardware protocol verified | Upright Kalman flight dashboard, ground zero, relative-heading dial, DPS368 relative altitude/climb, BMM350 high-field warning; calibrated north pending |
+| `021_Radar_BGT60TR13C` | hardware acquisition verified | CM55 radar ID, exact FIFO self-test and raw ADC capture using the Temp/Radar reference; gesture recognition and LCD UI not yet implemented |
+| `022_Radar_AI_Gestures` | hardware inference verified | Ports the real Temp/Radar DEEPCRAFT model to CM55/Zephyr; continuous ~200 Hz acquisition, ~20 Hz UART predictions, desktop numerical cross-check; human gesture accuracy pending |
 
 The next work is deliberately ordered: validate the supported CM55→CM33-NS
 mailbox relay first, then prove safe raw flash access before placing a
@@ -99,7 +101,7 @@ boundaries are verified.
 | Peripheral | Current position | Next prerequisite |
 | --- | --- | --- |
 | BMM350 magnetometer | I3C ID/data verified in 020 | Chapter-local PDL backend, chip ID 0x33, 25 Hz compensated XYZ; high-field warning, calibrated heading pending |
-| BGT60TR13C radar | blocked | Add the board SPI/reset/interrupt integration and a compatible Zephyr driver |
+| BGT60TR13C radar | Acquisition verified in 021; AI inference in 022 | Continuous input and DEEPCRAFT model numerics verified; next steps are human gesture validation and radar UI |
 | PDM microphone | blocked | Provide microphone pin, clock, DMA, and audio-format board configuration |
 | Wi-Fi | scan verified | Obtain an approved SSID and credentials before adding an association example |
 | Bluetooth LE | NUS loopback verified | Future scope: pairing, custom GATT, and repeatable phone acceptance automation |

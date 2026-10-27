@@ -13,7 +13,7 @@ write timestamped serial logs that are intentionally ignored by Git.
 | 005 | BMI270 accelerometer + gyroscope | Verified | Zephyr driver returns live converted motion data; test also verifies non-zero raw data at `0x68`. |
 | 006 | Button + LED event | Protocol verified | Firmware booted with GPIO setup; serial LED commands passed. A physical SW1 press is still required to verify the interrupt event end-to-end. |
 | 007 | BMM350 magnetometer | ID/data verified via Chapter 020 | Chapter-local PDL I3C backend reads ID 0x33 and compensated XYZ at 25 Hz. Generic Zephyr controller integration and calibrated heading remain pending. |
-| 008 | BGT60TR13C radar | Blocked | No matching BGT60TR13C driver exists in this Zephyr tree and the board has no radar SPI device node. |
+| 008 | BGT60TR13C radar | Acquisition verified via 021; AI inference via 022 | Local PDL SCB3 port, continuous ~200 Hz frames and real DEEPCRAFT model at ~20 predictions/s. Desktop inference cross-check passed; human gesture accuracy pending. |
 | 009 | PDM microphone | Blocked | An Infineon DMIC driver exists, but all E84 PDM controller channels and board microphone pin configuration are disabled. |
 | 010 | CYW55513 Wi-Fi SSID scan | Verified | Board scan completed and printed nearby SSIDs, RSSI, and channel without connecting. |
 | 011 | CYW55513 Bluetooth LE | Verified | Controller firmware loaded over H:4 UART; serial test verifies connectable advertising control and the standard Nordic UART Service UUID. nRF Connect remains the over-the-air NUS acceptance check. |
@@ -96,9 +96,15 @@ claim to use them.
   a generic Zephyr I3C controller driver or sensor node. The first physical
   test reported a strong field (~2280 µT); magnetic environment/calibration
   and mounting validation are required before adding compass heading.
-- **BGT60TR13C:** There is no BGT60 radar driver or board SPI node in this
-  Zephyr revision. A dedicated driver and validated reset/interrupt/SPI device
-  tree integration are prerequisites.
+- **BGT60TR13C:** Chapter 021 uses the user's `Temp/Radar` reference with an
+  Apache-2.0 portable Infineon driver and chapter-local PDL SCB3 platform port.
+  ID, reset, polled data-ready, exact FIFO self-test and raw ADC acquisition
+  are verified on the board. This does not add a generic Zephyr sensor driver.
+  Chapter 022 ports the actual local DEEPCRAFT model with continuous ~200 Hz
+  acquisition and ~20 Hz CM55 CPU inference. Python tests compare synthetic
+  and live-input scores against NumPy FFT plus desktop LiteRT. Model sources
+  stay in the licensed local reference, imported only into ignored build
+  output. Human gesture validation and LCD UI remain.
 - **PDM microphone:** The SoC and Infineon DMIC driver are present, but the
   E84 board leaves `dmic0` and every channel disabled. A board overlay needs
   the actual microphone pins, clock, channel choice, and DMA/audio format.
