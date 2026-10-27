@@ -88,6 +88,9 @@ programming, and command details.
 | `020_Kalman_Artificial_Horizon` | hardware protocol verified | Upright Kalman flight dashboard, ground zero, relative-heading dial, DPS368 relative altitude/climb, BMM350 high-field warning; calibrated north pending |
 | `021_Radar_BGT60TR13C` | hardware acquisition verified | CM55 radar ID, exact FIFO self-test and raw ADC capture using the Temp/Radar reference; gesture recognition and LCD UI not yet implemented |
 | `022_Radar_AI_Gestures` | hardware inference verified | Ports the real Temp/Radar DEEPCRAFT model to CM55/Zephyr; continuous ~200 Hz acquisition, ~20 Hz UART predictions, desktop numerical cross-check; human gesture accuracy pending |
+| `023_AES256_GCM_Encrypted_Files` | hardware storage verified | AES-256-GCM authenticated LittleFS files, persistent TF-M keys/counters, independent Python crypto checks, tamper/reboot/interrupted-update tests |
+| `024_AES128_GCM_Encrypted_Files` | hardware storage verified | Separate AES-128-GCM firmware, key and flash partition with the same acceptance suite |
+| `025_ChaCha20_Poly1305_Encrypted_Files` | hardware storage verified | Separate ChaCha20-Poly1305 firmware, key and flash partition with the same acceptance suite |
 
 The next work is deliberately ordered: validate the supported CM55→CM33-NS
 mailbox relay first, then prove safe raw flash access before placing a
