@@ -91,6 +91,7 @@ programming, and command details.
 | `023_AES256_GCM_Encrypted_Files` | hardware storage verified | AES-256-GCM authenticated LittleFS files, persistent TF-M keys/counters, independent Python crypto checks, tamper/reboot/interrupted-update tests |
 | `024_AES128_GCM_Encrypted_Files` | hardware storage verified | Separate AES-128-GCM firmware, key and flash partition with the same acceptance suite |
 | `025_ChaCha20_Poly1305_Encrypted_Files` | hardware storage verified | Separate ChaCha20-Poly1305 firmware, key and flash partition with the same acceptance suite |
+| `026_Encrypted_Sensor_Logger` | hardware protocol verified | Live BMI270/DPS368 logger with LVGL, persistent TF-M AES-256-GCM, multicore-safe LittleFS writes, tamper rejection and reboot recovery; visual/touch and power-cut checks pending |
 
 The next work is deliberately ordered: validate the supported CM55→CM33-NS
 mailbox relay first, then prove safe raw flash access before placing a

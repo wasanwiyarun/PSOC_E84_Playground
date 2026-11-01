@@ -1,0 +1,16 @@
+#include "../../020_Kalman_Artificial_Horizon/app.overlay"
+
+/* M55's chosen flash is the SAHB alias of the same S25HS512T. The board's
+ * alias incorrectly advertises 64 KiB sectors; flash0 correctly uses 256 KiB. */
+&flash0_sahb { erase-block-size = <0x40000>; };
+
+/* Dedicated area; initialization refuses any non-erased, unmountable media. */
+&flash0 {
+    partitions {
+        logger_partition: partition@1780000 {
+            compatible = "zephyr,mapped-partition";
+            label = "encrypted-logger";
+            reg = <0x1780000 0x300000>;
+        };
+    };
+};
