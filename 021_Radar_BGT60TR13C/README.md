@@ -1,5 +1,11 @@
 # Chapter 021 — BGT60TR13C radar bring-up
 
+[All examples](../README.md) · [Host setup](../docs/SETUP.md) · [Test scope](../docs/TESTING.md) · [Flash safety](../docs/STORAGE.md)
+
+Unless a command explicitly says repository root, run it from this chapter
+directory using the environment in the setup guide. Programming replaces the
+current board firmware; check the storage guide before running write tests.
+
 CM55 / Zephyr radar acquisition on TESA AIoT E84. Uses the board wiring and
 P0 acquisition settings from the user's existing `Temp/Radar` ModusToolbox
 DEEPCRAFT example. The Temp reference and global Zephyr tree are unchanged.
@@ -102,6 +108,7 @@ Earlier failed attempts are retained in their own timestamped log folders.
 Startup was corrected to initialize the 17.2032 MHz ECO metadata before UART
 setup and use valid divider index 1, matching the reference BSP.
 
-The board is left running Chapter 021, idle between capture commands. Gesture
+At the end of that recorded run, the board was left running Chapter 021, idle
+between capture commands. This does not describe its current firmware. Gesture
 accuracy, physical target distance, continuous acquisition, injected wiring
 faults and display interaction have **not** been validated by these tests.

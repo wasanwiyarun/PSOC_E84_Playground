@@ -1,5 +1,11 @@
 # 026 — Encrypted sensor data logger
 
+[All examples](../README.md) · [Host setup](../docs/SETUP.md) · [Test scope](../docs/TESTING.md) · [Flash safety](../docs/STORAGE.md)
+
+Unless a command explicitly says repository root, run it from this chapter
+directory using the environment in the setup guide. Programming replaces the
+current board firmware; check the storage guide before running write tests.
+
 An educational, touchscreen-controlled recorder using real BMI270 acceleration/
 angular velocity and DPS368 temperature/pressure, with AES-256-GCM authenticated
 records stored in external LittleFS. This is not a production key vault.

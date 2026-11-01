@@ -1,5 +1,11 @@
 # 022 — Radar AI gestures on Zephyr / CM55
 
+[All examples](../README.md) · [Host setup](../docs/SETUP.md) · [Test scope](../docs/TESTING.md) · [Flash safety](../docs/STORAGE.md)
+
+Unless a command explicitly says repository root, run it from this chapter
+directory using the environment in the setup guide. Programming replaces the
+current board firmware; check the storage guide before running write tests.
+
 Ports the actual DEEPCRAFT model and preprocessing from the local
 `Temp/Radar` example to the TESA AIoT E84. Live BGT60TR13C radar samples feed
 TensorFlow Lite Micro on CM55 and produce `unlabelled`, `Circle`, and `Push`

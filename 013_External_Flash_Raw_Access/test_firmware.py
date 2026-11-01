@@ -42,7 +42,7 @@ def run_test(args):
         print(f"Serial error: {error}", file=sys.stderr)
         return 2
 
-    print("PASS: raw external-flash write/read/CRC/cleanup verified.")
+    print("PASS: raw external-flash write/read/CRC verified; test pattern remains in storage.")
     return 0
 
 

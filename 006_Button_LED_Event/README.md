@@ -1,5 +1,11 @@
 # Button LED Event
 
+[All examples](../README.md) · [Host setup](../docs/SETUP.md) · [Test scope](../docs/TESTING.md) · [Flash safety](../docs/STORAGE.md)
+
+Unless a command explicitly says repository root, run it from this chapter
+directory using the environment in the setup guide. Programming replaces the
+current board firmware; check the storage guide before running write tests.
+
 Uses the PSOC Edge E84 AI Kit's `sw0` and `led0` aliases.  Each physical
 button press creates an interrupt event; a separate thread toggles LED0 and
 prints its count/status.  The split avoids GPIO work and serial output in the
@@ -19,3 +25,8 @@ Commands: `info`, `button status`, `led on`, `led off`, and `help`.
 Automated testing verifies the serial protocol and LED commands.  Final
 hardware acceptance is manual: press SW1 and confirm LED0 toggles and the
 `PRESSES` value increments on the serial console.
+
+Success ends with `PASS: button/LED console protocol verified.` Timestamped
+serial logs are stored in `test-results/` (or use `--log PATH`). A protocol PASS
+does not substitute for the manual button/visible-LED acceptance above; carrier
+switches are not necessarily the SoM's Zephyr `sw0` input.

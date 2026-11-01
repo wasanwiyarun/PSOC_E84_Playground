@@ -1,5 +1,11 @@
 # PSOC Edge84 AI Kit Hello World
 
+[All examples](../README.md) · [Host setup](../docs/SETUP.md) · [Test scope](../docs/TESTING.md) · [Flash safety](../docs/STORAGE.md)
+
+Unless a command explicitly says repository root, run it from this chapter
+directory using the environment in the setup guide. Programming replaces the
+current board firmware; check the storage guide before running write tests.
+
 A minimal Zephyr application for the PSOC Edge84 AI Kit M55 core.
 
 The AI Kit's M55 core is booted by its M33 core, so it must be built with
@@ -34,3 +40,10 @@ Hello from the PSOC Edge84 Zephyr playground!
 
 It waits two seconds after reset before printing, allowing a serial monitor to
 attach first.
+
+## Acceptance and limits
+
+The helper exits successfully only after the expected greeting arrives. This
+is a build/program/UART smoke test, not a sensor or peripheral test. To retain
+evidence, capture the helper's output with the date and image/commit identity;
+the application does not create a per-chapter test-results report.

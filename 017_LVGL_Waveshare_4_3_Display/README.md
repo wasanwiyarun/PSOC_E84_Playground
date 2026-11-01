@@ -1,5 +1,11 @@
 # 017 — LVGL text on Waveshare 4.3-inch RPi DSI display
 
+[All examples](../README.md) · [Host setup](../docs/SETUP.md) · [Test scope](../docs/TESTING.md) · [Flash safety](../docs/STORAGE.md)
+
+Unless a command explicitly says repository root, run it from this chapter
+directory using the environment in the setup guide. Programming replaces the
+current board firmware; check the storage guide before running write tests.
+
 This is a custom Zephyr display driver for the Waveshare 4.3-inch Raspberry Pi
 DSI Capacitive Touch Display connected to the TESA AIoT E84 board. It runs on
 the CM55 because the PSoC Edge GFXSS/MIPI-DSI display pipeline is owned there.

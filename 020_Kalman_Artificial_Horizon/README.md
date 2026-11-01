@@ -1,5 +1,11 @@
 # Chapter 020 — Kalman flight-style dashboard
 
+[All examples](../README.md) · [Host setup](../docs/SETUP.md) · [Test scope](../docs/TESTING.md) · [Flash safety](../docs/STORAGE.md)
+
+Unless a command explicitly says repository root, run it from this chapter
+directory using the environment in the setup guide. Programming replaces the
+current board firmware; check the storage guide before running write tests.
+
 A touchscreen attitude dashboard on the TESA AIoT E84 / Waveshare 4.3-inch
 800×480 display, running on CM55. It reuses the Chapter 017 display/startup
 pipeline and Chapter 018 FT5406 touch driver.

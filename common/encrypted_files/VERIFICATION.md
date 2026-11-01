@@ -4,19 +4,23 @@ Board: connected PSOC Edge E84 / KitProg3 19160998012D2400.
 Port: /dev/ttyACM0, 115200 baud. All three images were physically programmed
 and tested by the Python runner, not merely compiled.
 
-| Example | Algorithm | Hardware test groups | Evidence directory |
+| Example | Algorithm | Hardware test groups | Retained result snapshot |
 |---|---|---:|---|
-| 023 | AES-256-GCM | 12/12 PASS | [20261027-214427](../../023_AES256_GCM_Encrypted_Files/test-results/20261027-214427/results.json) |
-| 024 | AES-128-GCM | 12/12 PASS | [20261027-214534](../../024_AES128_GCM_Encrypted_Files/test-results/20261027-214534/results.json) |
-| 025 | ChaCha20-Poly1305 | 12/12 PASS | [20261027-214626](../../025_ChaCha20_Poly1305_Encrypted_Files/test-results/20261027-214626/results.json) |
+| 023 | AES-256-GCM | 12/12 PASS | [20261027-214427](verification/2026-10-27-023.json) |
+| 024 | AES-128-GCM | 12/12 PASS | [20261027-214534](verification/2026-10-27-024.json) |
+| 025 | ChaCha20-Poly1305 | 12/12 PASS | [20261027-214626](verification/2026-10-27-025.json) |
 
-Each evidence directory contains serial.log, flash.log and results.json. Raw
-test results are local ignored artifacts; this summary is intended for Git.
+The original chapter-local `test-results/<timestamp>/` directories contain
+serial.log, flash.log and results.json. Raw logs remain local ignored artifacts.
+The compact result JSON snapshots linked above are retained in Git so the
+evidence links work in a fresh clone. They record the original October run,
+not a new hardware test during the November documentation audit.
 Host format/oracle tests: **4/4 PASS**.
 
 After testing 024 and 025, 023 was reflashed and all 12 groups passed again:
-[final AES-256 rerun](../../023_AES256_GCM_Encrypted_Files/test-results/20261027-214736/results.json).
-The board is left running **023 / AES-256-GCM**, ready for UART commands.
+[final AES-256 rerun](verification/2026-10-27-023-rerun.json).
+At the end of that October run the board was left running **023 / AES-256-GCM**;
+this is historical state, not a claim about its currently installed firmware.
 
 ## Checks executed on each firmware
 

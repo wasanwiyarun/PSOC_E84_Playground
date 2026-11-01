@@ -1,5 +1,11 @@
 # PSOC Edge84 LED Blink with Serial Control
 
+[All examples](../README.md) · [Host setup](../docs/SETUP.md) · [Test scope](../docs/TESTING.md) · [Flash safety](../docs/STORAGE.md)
+
+Unless a command explicitly says repository root, run it from this chapter
+directory using the environment in the setup guide. Programming replaces the
+current board firmware; check the storage guide before running write tests.
+
 This Zephyr example runs two threads on the PSOC Edge84 AI Kit M55 core:
 
 - The LED thread toggles board alias `led0` (LED_0) every 500 ms.

@@ -1,5 +1,11 @@
 # Bluetooth LE advertiser and Nordic UART Service
 
+[All examples](../README.md) · [Host setup](../docs/SETUP.md) · [Test scope](../docs/TESTING.md) · [Flash safety](../docs/STORAGE.md)
+
+Unless a command explicitly says repository root, run it from this chapter
+directory using the environment in the setup guide. Programming replaces the
+current board firmware; check the storage guide before running write tests.
+
 This example runs Zephyr's Bluetooth host stack with the E84 AI kit's CYW55513
 controller over its on-board H:4 UART. It starts a connectable BLE advertiser
 named `PSE84-Playground` and exposes the standard Nordic UART Service (NUS),
@@ -77,7 +83,16 @@ ble send hello
 nRF Connect receives `hello` as a UART TX notification. This tests the
 opposite direction without using RX loopback.
 
-Build with `./build.sh`; use the repository flash helper; then run
-`./test_firmware.py --port /dev/ttyACM0`. The automated test verifies the
+From this example directory in the configured Python environment:
+
+```sh
+bash build.sh
+bash ../tools/flash_and_monitor_pse84_ai.sh --build-dir build-pse84-ai \
+  --companion-domain enable_cm55 --app-domain 011_Bluetooth_LE_Advertiser \
+  --expect "OK BT ADVERTISING=ON NAME=PSE84-Playground SERVICE=NUS"
+python test_firmware.py --port /dev/ttyACM0
+```
+
+The automated test verifies the
 controller initialization, NUS UUID advertising, and advertise start/stop
 protocol. The nRF Connect steps above are the final over-the-air NUS check.

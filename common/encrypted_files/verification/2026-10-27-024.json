@@ -1,0 +1,64 @@
+{
+  "algorithm": "AES128_GCM",
+  "time_utc": "2026-10-27T14:45:34.503656+00:00",
+  "checks": [
+    "physical_board_flash",
+    "identity_partition_persistent_key",
+    "littlefs_mount",
+    "independent_python_crypto_vector_and_tag_rejection",
+    "binary_empty_boundary_max_length_and_monotonic_nonces",
+    "rewrite_uses_new_nonce_and_ciphertext",
+    "wrong_key_rejected_original_unchanged",
+    "header_nonce_ciphertext_tag_tampering_rejected",
+    "reboot_key_file_and_nonce_persistence",
+    "interrupted_update_partial_and_synced_preserve_old_file",
+    "invalid_commands_and_overflow_rejected_no_file_damage",
+    "list_delete_missing_file"
+  ],
+  "passed": true,
+  "physical_power_cut_tested": false,
+  "image_sha256": "dc5ec1310b1af2931b4971aec5dec17235ba6f3c2b032637a57f9e6fe29eaaf2",
+  "test_prefix": "t9c83a83fda",
+  "timings": [
+    {
+      "bytes": 0,
+      "write_uart_ms": 63.69,
+      "crypto_ms": 2
+    },
+    {
+      "bytes": 1,
+      "write_uart_ms": 65.68,
+      "crypto_ms": 2
+    },
+    {
+      "bytes": 15,
+      "write_uart_ms": 68.87,
+      "crypto_ms": 2
+    },
+    {
+      "bytes": 16,
+      "write_uart_ms": 69.1,
+      "crypto_ms": 2
+    },
+    {
+      "bytes": 17,
+      "write_uart_ms": 1071.33,
+      "crypto_ms": 2
+    },
+    {
+      "bytes": 255,
+      "write_uart_ms": 1116.95,
+      "crypto_ms": 4
+    },
+    {
+      "bytes": 256,
+      "write_uart_ms": 1118.08,
+      "crypto_ms": 3
+    },
+    {
+      "bytes": 1024,
+      "write_uart_ms": 1265.19,
+      "crypto_ms": 9
+    }
+  ]
+}

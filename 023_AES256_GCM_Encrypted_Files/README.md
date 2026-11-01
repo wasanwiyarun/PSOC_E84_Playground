@@ -1,5 +1,11 @@
 # 023 — AES256_GCM encrypted files
 
+[All examples](../README.md) · [Host setup](../docs/SETUP.md) · [Test scope](../docs/TESTING.md) · [Flash safety](../docs/STORAGE.md)
+
+Unless a command explicitly says repository root, run it from this chapter
+directory using the environment in the setup guide. Programming replaces the
+current board firmware; check the storage guide before running write tests.
+
 CM33 non-secure Zephyr application using **TF-M PSA Crypto** and a separate
 LittleFS external-flash partition. This example selects only AES256_GCM
 (256-bit key); the common implementation is shared with the other two examples.
@@ -57,4 +63,3 @@ returns plaintext as hex **only after authentication succeeds**.
 
 Additional test commands, key/nonce design, file format and security limitations:
 [shared implementation notes](../common/encrypted_files/README.md).
-

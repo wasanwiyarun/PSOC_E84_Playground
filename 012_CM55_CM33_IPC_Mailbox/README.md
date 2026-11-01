@@ -1,5 +1,11 @@
 # CM55 to CM33-NS PSA mailbox relay
 
+[All examples](../README.md) · [Host setup](../docs/SETUP.md) · [Test scope](../docs/TESTING.md) · [Flash safety](../docs/STORAGE.md)
+
+Unless a command explicitly says repository root, run it from this chapter
+directory using the environment in the setup guide. Programming replaces the
+current board firmware; check the storage guide before running write tests.
+
 This chapter validates the supported PSoC Edge E84 multicore path. CM33
 Non-Secure owns CM55 boot and hosts the TF-M relay; CM55 uses the official
 mailbox/SRF client path to make PSA calls to that relay. It is intentionally
