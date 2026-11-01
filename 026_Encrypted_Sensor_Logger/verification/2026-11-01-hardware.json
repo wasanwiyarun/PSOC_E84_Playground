@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "checks": [
+    "physical_paired_firmware_flash",
+    "storage_secure_key_live_sensors_display_touch_ready",
+    "aes256_gcm_matches_independent_python",
+    "record_beyond_1KiB_no_drops_ui_continues_busy_guards",
+    "verified_sensor_readback_ciphertext_nonce_and_chain",
+    "parser_bounds_path_and_overwrite_rejection",
+    "late_record_header_ciphertext_tag_tamper_no_plaintext_leak",
+    "sealed_file_key_persist_after_reboot",
+    "interrupted_log_recovers_synced_prefix_nonce_not_reused",
+    "extended_recording_nonce_reservation_rollover_no_drops",
+    "list_delete_only_test_files_final_idle_display_healthy"
+  ],
+  "time_utc": "2026-11-01T14:19:31.368231+00:00",
+  "physical_power_cut_tested": false,
+  "visual_touch_confirmed": false,
+  "cm55_sha256": "fc236014f7a446c4c4eb66342954836ed6f2e8c48a521419676b788a8428c395",
+  "cm33-ns_sha256": "da774b63b375534306b1379044e238e591ababe43b47c2242788f003e03a9df4",
+  "test_prefix": "t901ef40b8c",
+  "recorded_samples": 67,
+  "max_sample_gap_ms": 178,
+  "soak": {
+    "samples": 1155,
+    "batches": 73,
+    "max_sample_gap_ms": 2099,
+    "duration_ms": 182906,
+    "first_nonce": 774,
+    "last_nonce": 846,
+    "sensor_errors": 0,
+    "dropped": 0
+  },
+  "final_status": {
+    "mounted": "1",
+    "key": "1",
+    "recording": "0",
+    "samples": "1155",
+    "batches": "73",
+    "bytes": "52128",
+    "free": "2621440",
+    "nonce": "847",
+    "name": "t901ef40b8cs",
+    "acquired": "1205",
+    "errors": "0",
+    "dropped": "0",
+    "sensor": "1",
+    "display": "1",
+    "touch": "1",
+    "renders": "529",
+    "rc": "0"
+  }
+}

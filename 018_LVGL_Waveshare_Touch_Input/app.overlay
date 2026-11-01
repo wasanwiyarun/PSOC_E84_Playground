@@ -1,0 +1,47 @@
+/ {
+	chosen {
+		zephyr,display = &waveshare_4p3;
+	};
+
+	reserved-memory {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		ranges;
+
+		gfx_mem: memory@26200000 {
+			compatible = "zephyr,memory-region", "mmio-sram";
+			zephyr,memory-region = "GFX_MEM";
+			reg = <0x26200000 0x00300000>;
+		};
+	};
+};
+
+&p17_0_scb5_i2c_scl { drive-open-drain; input-enable; };
+&p17_1_scb5_i2c_sda { drive-open-drain; input-enable; };
+
+&peri0_group1_16bit_0 { status = "okay"; clock-div = <32>; };
+
+&scb5 {
+	compatible = "infineon,i2c";
+	status = "okay";
+	clocks = <&peri0_group1_16bit_0>;
+	clock-frequency = <100000>;
+	pinctrl-0 = <&p17_0_scb5_i2c_scl &p17_1_scb5_i2c_sda>;
+	pinctrl-names = "default";
+	#address-cells = <1>;
+	#size-cells = <0>;
+
+	waveshare_4p3: display@45 {
+		compatible = "waveshare,ws43";
+		reg = <0x45>;
+		width = <832>;
+		height = <480>;
+		status = "okay";
+	};
+
+	ft5406: touch@38 {
+		compatible = "focaltech,ft5406";
+		reg = <0x38>;
+		status = "okay";
+	};
+};

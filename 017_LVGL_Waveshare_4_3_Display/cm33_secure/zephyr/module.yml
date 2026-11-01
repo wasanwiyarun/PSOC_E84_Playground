@@ -1,0 +1,3 @@
+name: display_clock_startup
+build:
+  cmake: .

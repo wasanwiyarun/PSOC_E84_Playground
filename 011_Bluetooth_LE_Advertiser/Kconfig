@@ -1,0 +1,12 @@
+menu "PSE84 Bluetooth LE advertiser options"
+
+config APP_NUS_LOOPBACK
+	bool "Echo received Nordic UART Service data"
+	help
+	  When enabled, each message written to the NUS RX characteristic is sent
+	  back on the NUS TX notification characteristic. The BLE client must
+	  enable TX notifications to receive the echo.
+
+endmenu
+
+source "Kconfig.zephyr"

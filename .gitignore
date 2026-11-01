@@ -1,0 +1,7 @@
+# Python bytecode generated when running shared utilities.
+__pycache__/
+tools/__pycache__/
+tools/python/**/__pycache__/
+/test-results/
+# Local generated knowledge graph/cache, not source or release documentation.
+/graphify-out/

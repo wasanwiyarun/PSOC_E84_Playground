@@ -1,0 +1,10 @@
+/* Separate 1 MiB data area; leave storage@0 and all firmware slots intact. */
+&flash0 {
+    partitions {
+        encrypted_partition: partition@b00000 {
+            compatible = "zephyr,mapped-partition";
+            label = "encrypted-1";
+            reg = <0xb00000 0x100000>;
+        };
+    };
+};
